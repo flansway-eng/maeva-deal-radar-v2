@@ -1,0 +1,17 @@
+[project]
+name = "maeva-deal-radar-v2"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "ARECIE SG", email = "flansway@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+maeva-deal-radar-v2 = "maeva_deal_radar_v2:main"
+
+[build-system]
+requires = ["uv_build>=0.9.29,<0.10.0"]
+build-backend = "uv_build"
