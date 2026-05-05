@@ -8,9 +8,11 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "lancedb>=0.20.0",
     "pydantic>=2.13.3",
-    "pydantic-settings>=2.14.0",
+    "pydantic-settings>=2.0.0",
     "python-dotenv>=1.2.2",
+    "sentence-transformers>=5.0.0",
 ]
 
 [project.scripts]
@@ -51,6 +53,11 @@ strict = true
 warn_return_any = true
 warn_unused_configs = true
 plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["sentence_transformers.*", "torch.*", "lancedb.*", "pyarrow.*"]
+ignore_missing_imports = true
+ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
