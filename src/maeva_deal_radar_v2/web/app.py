@@ -9,12 +9,14 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from fastapi import FastAPI
+from fastapi import BackgroundTasks, FastAPI
 from fastapi.responses import HTMLResponse, JSONResponse
 
 logging.basicConfig(level=logging.WARNING)
 
 app = FastAPI(title="Maeva Deal Radar Room", version="2.0")
+
+pipeline_status: dict[str, str] = {"state": "idle", "result": ""}
 
 HTML_PAGE = """<!DOCTYPE html>
 <html lang="fr">
@@ -107,7 +109,7 @@ HTML_PAGE = """<!DOCTYPE html>
   <!-- PIPELINE -->
   <div class="card">
     <h2>Lancer le pipeline</h2>
-    <div class="source-grid" id="sourceGrid">
+    <div class="source-grid">
       <button class="source-btn active" data-source="bodacc">BODACC</button>
       <button class="source-btn active" data-source="rss">RSS</button>
       <button class="source-btn" data-source="pappers">Pappers</button>
@@ -151,6 +153,7 @@ HTML_PAGE = """<!DOCTYPE html>
 </main>
 <script>
 const sources = new Set(['bodacc', 'rss']);
+let pollInterval = null;
 
 document.querySelectorAll('.source-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -209,6 +212,24 @@ async function loadRecentLeads() {
   } catch(e) { console.error(e); }
 }
 
+async function pollPipelineStatus(box, btn) {
+  try {
+    const r = await fetch('/api/pipeline/status');
+    const d = await r.json();
+    if (d.state === 'done') {
+      clearInterval(pollInterval);
+      pollInterval = null;
+      box.textContent = d.result || 'Pipeline terminé.';
+      btn.disabled = false;
+      btn.innerHTML = '▶ Lancer la captation';
+      loadStats();
+      loadRecentLeads();
+    } else if (d.state === 'running') {
+      box.textContent = 'Pipeline en cours... ⏳';
+    }
+  } catch(e) { console.error(e); }
+}
+
 async function runPipeline() {
   const btn = document.getElementById('btnPipeline');
   const box = document.getElementById('pipelineResult');
@@ -216,7 +237,7 @@ async function runPipeline() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> En cours...';
   box.className = 'result-box visible';
-  box.textContent = 'Pipeline en cours... (30-60 secondes selon les sources)';
+  box.textContent = 'Démarrage du pipeline...';
   try {
     const r = await fetch('/api/pipeline', {
       method: 'POST',
@@ -224,14 +245,13 @@ async function runPipeline() {
       body: JSON.stringify({sources: [...sources], max_signals: 5})
     });
     const d = await r.json();
-    box.textContent = d.result || d.error || 'Terminé.';
-    loadStats();
-    loadRecentLeads();
+    box.textContent = d.result || 'Pipeline lancé.';
+    pollInterval = setInterval(() => pollPipelineStatus(box, btn), 5000);
   } catch(e) {
     box.textContent = 'Erreur : ' + e.message;
+    btn.disabled = false;
+    btn.innerHTML = '▶ Lancer la captation';
   }
-  btn.disabled = false;
-  btn.innerHTML = '▶ Lancer la captation';
 }
 
 async function searchLeads() {
@@ -333,33 +353,57 @@ async def api_leads(limit: int = 10, status: str = "KEEP") -> JSONResponse:
 
 
 @app.post("/api/pipeline")
-async def api_pipeline(body: dict[str, Any]) -> JSONResponse:
-    """Lance le pipeline de captation."""
-    try:
-        from maeva_deal_radar_v2.signals.bodacc import BodaccSource
-        from maeva_deal_radar_v2.signals.pappers import PappersSource
-        from maeva_deal_radar_v2.signals.pipeline import run_pipeline
-        from maeva_deal_radar_v2.signals.rss import RssSource
-        source_map = {
-            "bodacc": BodaccSource,
-            "rss": RssSource,
-            "pappers": PappersSource,
-        }
-        requested = body.get("sources", ["bodacc", "rss"])
-        max_signals = int(body.get("max_signals", 5))
-        active = [source_map[s]() for s in requested if s in source_map]
-        if not active:
-            return JSONResponse({"error": "Aucune source valide."})
-        result = run_pipeline(
-            sources=active,
-            max_signals_per_source=max_signals,
-            qualify_delay=0.3,
-            store_in_lancedb=True,
-            verbose=False,
+async def api_pipeline(
+    body: dict[str, Any],
+    background_tasks: BackgroundTasks,
+) -> JSONResponse:
+    """Lance le pipeline en arrière-plan."""
+    if pipeline_status["state"] == "running":
+        return JSONResponse({"result": "Pipeline déjà en cours..."})
+
+    def run() -> None:
+        pipeline_status["state"] = "running"
+        pipeline_status["result"] = ""
+        try:
+            from maeva_deal_radar_v2.signals.bodacc import BodaccSource
+            from maeva_deal_radar_v2.signals.pappers import PappersSource
+            from maeva_deal_radar_v2.signals.pipeline import run_pipeline
+            from maeva_deal_radar_v2.signals.rss import RssSource
+            source_map = {
+                "bodacc": BodaccSource,
+                "rss": RssSource,
+                "pappers": PappersSource,
+            }
+            requested = body.get("sources", ["bodacc", "rss"])
+            max_signals = int(body.get("max_signals", 5))
+            active = [source_map[s]() for s in requested if s in source_map]
+            result = run_pipeline(
+                sources=active,
+                max_signals_per_source=max_signals,
+                qualify_delay=0.3,
+                store_in_lancedb=True,
+                verbose=False,
+            )
+            pipeline_status["result"] = result.summary
+        except Exception as exc:
+            pipeline_status["result"] = f"Erreur : {exc}"
+        finally:
+            pipeline_status["state"] = "done"
+
+    background_tasks.add_task(run)
+    return JSONResponse({
+        "result": (
+            "Pipeline lancé en arrière-plan.\n"
+            "Résultats dans 30-60 secondes.\n"
+            "Le tableau de bord se mettra à jour automatiquement."
         )
-        return JSONResponse({"result": result.summary})
-    except Exception as e:
-        return JSONResponse({"error": str(e)}, status_code=500)
+    })
+
+
+@app.get("/api/pipeline/status")
+async def api_pipeline_status() -> JSONResponse:
+    """Statut du pipeline en cours."""
+    return JSONResponse(pipeline_status)
 
 
 @app.post("/api/search")
