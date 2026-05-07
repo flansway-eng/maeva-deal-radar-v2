@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: maeva-deal-radar
+    runtime: python
+    buildCommand: pip install uv && uv sync --no-dev
+    startCommand: uv run uvicorn maeva_deal_radar_v2.web.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: PAPPERS_API_KEY
+        sync: false
+      - key: ENVIRONMENT
+        value: production
