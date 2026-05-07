@@ -20,7 +20,7 @@ from maeva_deal_radar_v2.qualification.schemas import (
 
 logger = logging.getLogger(__name__)
 
-EVAL_CASES_PATH = Path("data/eval_cases.json")
+EVAL_CASES_PATH = Path("tests/fixtures/eval_cases.json")
 
 
 def load_eval_cases() -> list[EvalCase]:

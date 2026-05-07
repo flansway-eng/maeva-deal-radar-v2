@@ -1,0 +1,306 @@
+{
+    "version": "1.0",
+    "description": "Dataset d'évaluation synthétique pour le qualifier M&A/PE Maeva",
+    "cases": [
+      {
+        "id": "keep-001",
+        "company_name": "Ardian",
+        "source_url": "https://ardian.com",
+        "content": "Ardian annonce le closing de son fonds mid-market européen à 4 milliards d'euros, avec un focus particulier sur les PME françaises et les opérations de build-up en Île-de-France.",
+        "signal_type": "fund_closing",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Fonds PE majeur, closing récent, cible idéale"
+      },
+      {
+        "id": "keep-002",
+        "company_name": "Astorg",
+        "source_url": "https://astorg.com",
+        "content": "Astorg renforce son équipe Mid-Cap France et Benelux avec trois nouveaux partners issus de fonds concurrents. Le fonds cible des entreprises entre 50M et 500M de valeur d'entreprise.",
+        "signal_type": "hiring",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Recrutement d'équipe = signal fort d'activité deal"
+      },
+      {
+        "id": "keep-003",
+        "company_name": "CAPZA",
+        "source_url": "https://capza.co",
+        "content": "CAPZA lève 1,2 milliard d'euros pour son nouveau fonds de dette privée et equity mid-market. L'équipe d'investissement basée à Paris cible des opérations de 20M à 200M.",
+        "signal_type": "fund_closing",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Fonds dette + equity, mid-market, Paris"
+      },
+      {
+        "id": "keep-004",
+        "company_name": "Eurazeo",
+        "source_url": "https://eurazeo.com",
+        "content": "Eurazeo accélère son déploiement mid-market en France avec l'ouverture d'une antenne dédiée aux PME de croissance en Île-de-France. Ticket cible entre 30M et 150M.",
+        "signal_type": "expansion",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Expansion géographique + focus PME IDF"
+      },
+      {
+        "id": "keep-005",
+        "company_name": "IK Partners",
+        "source_url": "https://ikpartners.com",
+        "content": "IK Partners ouvre son bureau parisien et recrute une équipe locale pour le suivi de ses participations françaises et l'origination de nouvelles opportunités mid-market.",
+        "signal_type": "expansion",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Ouverture bureau Paris = ancrage local fort"
+      },
+      {
+        "id": "keep-006",
+        "company_name": "LBO France",
+        "source_url": "https://lbofrance.com",
+        "content": "LBO France réorganise son équipe Mid Market et nomme deux nouveaux directeurs d'investissement pour couvrir les secteurs santé et services B2B en France.",
+        "signal_type": "leadership_change",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Réorganisation équipe = moment d'approche opportun"
+      },
+      {
+        "id": "keep-007",
+        "company_name": "Naxicap Partners",
+        "source_url": "https://naxicap.fr",
+        "content": "Naxicap Partners finalise l'acquisition d'une ETI industrielle bretonne et annonce l'ouverture d'un nouveau véhicule dédié aux entreprises familiales françaises.",
+        "signal_type": "deal_announced",
+        "geography": "France",
+        "human_decision": "KEEP",
+        "notes": "Deal récent + nouveau véhicule = activité forte"
+      },
+      {
+        "id": "keep-008",
+        "company_name": "PAI Partners",
+        "source_url": "https://paipartners.com",
+        "content": "PAI Partners lance un programme de co-investissement avec des family offices et investisseurs institutionnels pour ses opérations mid-market France et Benelux.",
+        "signal_type": "partnership",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Programme co-invest = réseau actif, bon moment"
+      },
+      {
+        "id": "keep-009",
+        "company_name": "Siparex",
+        "source_url": "https://siparex.com",
+        "content": "Siparex renforce sa présence en Île-de-France avec le recrutement d'une équipe dédiée aux PME tech et industrielles. Tickets entre 5M et 50M d'euros.",
+        "signal_type": "hiring",
+        "geography": "Île-de-France",
+        "human_decision": "KEEP",
+        "notes": "Recrutement IDF, tickets mid-market"
+      },
+      {
+        "id": "keep-010",
+        "company_name": "Bpifrance",
+        "source_url": "https://bpifrance.fr/investissement",
+        "content": "Bpifrance Investissement déploie un nouveau fonds de fonds mid-market de 800M euros en partenariat avec des fonds régionaux pour soutenir les PME françaises à potentiel.",
+        "signal_type": "fund_closing",
+        "geography": "France",
+        "human_decision": "KEEP",
+        "notes": "Acteur public incontournable du PE français"
+      },
+      {
+        "id": "stop-001",
+        "company_name": "PE Jobs Board",
+        "source_url": "https://privateequityjobs.com/france",
+        "content": "Offres d'emploi private equity France : analyste, associate, vice-président. Rejoignez les meilleurs fonds. Postulez maintenant. 450 offres disponibles.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Job board évident, aucune valeur pour la prospection"
+      },
+      {
+        "id": "stop-002",
+        "company_name": "Recrutement Finance",
+        "source_url": "https://careers.ardian.com/jobs",
+        "content": "Rejoignez Ardian ! Nous recrutons des talents en private equity, infrastructure et dette privée. Candidatez en ligne pour nos postes d'analyste et d'associate.",
+        "signal_type": "unknown",
+        "geography": "Île-de-France",
+        "human_decision": "STOP",
+        "notes": "Page carrières d'un fonds, pas l'équipe d'investissement"
+      },
+      {
+        "id": "stop-003",
+        "company_name": "Classement PE France",
+        "source_url": "https://decideurs-magazine.com/top-50-private-equity-france",
+        "content": "Top 50 des fonds de private equity français selon les levées de fonds. Palmarès annuel des meilleurs gérants, classement par actifs sous gestion.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Contenu média/classement, pas une source de prospect"
+      },
+      {
+        "id": "stop-004",
+        "company_name": "Formation PE",
+        "source_url": "https://hec.edu/fr/formation-continue/private-equity",
+        "content": "Formation certifiante Private Equity & LBO — HEC Paris. Maîtrisez les techniques d'évaluation, de structuration et de suivi des opérations de capital-investissement.",
+        "signal_type": "unknown",
+        "geography": "Île-de-France",
+        "human_decision": "STOP",
+        "notes": "Formation académique, aucun signal d'investissement"
+      },
+      {
+        "id": "stop-005",
+        "company_name": "Forum Étudiants Finance",
+        "source_url": "https://reddit.com/r/financefrancaise/private_equity",
+        "content": "Discussion : comment entrer en private equity en France ? Quels fonds recrutent des débutants ? Conseils pour les entretiens chez Ardian, Eurazeo, PAI.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Forum étudiant, bruit total"
+      },
+      {
+        "id": "stop-006",
+        "company_name": "Annuaire PE",
+        "source_url": "https://franceinvest.eu/nos-membres/annuaire",
+        "content": "Annuaire des membres France Invest : retrouvez tous les fonds de capital-investissement français, leurs équipes et leurs secteurs d'intervention.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Annuaire statique, pas de signal d'activité"
+      },
+      {
+        "id": "stop-007",
+        "company_name": "Guide Investisseur",
+        "source_url": "https://bpifrance-creation.fr/encyclopedie/financement/private-equity",
+        "content": "Qu'est-ce que le private equity ? Guide complet pour comprendre le capital-investissement, les LBO, et comment les PME peuvent accéder à ces financements.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Contenu éducatif, aucune valeur prospection"
+      },
+      {
+        "id": "stop-008",
+        "company_name": "Presse Économique",
+        "source_url": "https://lesechos.fr/finance-marches/capital-investissement",
+        "content": "Rubrique capital-investissement des Echos : actualités M&A, LBO, levées de fonds. Suivez toute l'actualité du private equity français et européen.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Page catégorie presse généraliste"
+      },
+      {
+        "id": "stop-009",
+        "company_name": "LinkedIn PE France",
+        "source_url": "https://linkedin.com/groups/private-equity-france",
+        "content": "Groupe LinkedIn Private Equity France — 45 000 membres. Partagez actualités, opportunités et débats sur le capital-investissement français.",
+        "signal_type": "unknown",
+        "geography": "France",
+        "human_decision": "STOP",
+        "notes": "Groupe réseau social, pas un fonds"
+      },
+      {
+        "id": "stop-010",
+        "company_name": "Cabinet Conseil Généraliste",
+        "source_url": "https://mckinsey.com/fr/private-equity-practice",
+        "content": "McKinsey accompagne les fonds de private equity dans leur création de valeur : due diligence stratégique, transformation des participations, préparation à la sortie.",
+        "signal_type": "unknown",
+        "geography": "Île-de-France",
+        "human_decision": "STOP",
+        "notes": "Conseil stratégique généraliste, pas un fonds PE"
+      },
+      {
+        "id": "review-001",
+        "company_name": "Lazard France",
+        "source_url": "https://lazard.com/fr/france",
+        "content": "Lazard France renforce son équipe M&A mid-cap avec deux managing directors expérimentés. La banque conseille sur des transactions de 50M à 500M en France.",
+        "signal_type": "hiring",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "Conseil M&A ≠ fonds PE — mais potentiel apporteur d'affaires"
+      },
+      {
+        "id": "review-002",
+        "company_name": "Rothschild & Co",
+        "source_url": "https://rothschildandco.com/fr/merchant-banking",
+        "content": "Rothschild Merchant Banking annonce un nouveau véhicule de co-investissement avec des institutionnels pour des opérations mid-market en Europe.",
+        "signal_type": "fund_closing",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "Activité PE réelle mais banque d'affaires en premier lieu"
+      },
+      {
+        "id": "review-003",
+        "company_name": "Family Office Privé",
+        "source_url": "https://weinberg-capital.com",
+        "content": "Weinberg Capital Partners étend son activité de capital-investissement avec un mandat dédié aux entreprises familiales françaises valorisées entre 20M et 150M.",
+        "signal_type": "expansion",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "Family office avec activité PE — pertinence à valider"
+      },
+      {
+        "id": "review-004",
+        "company_name": "Fonds Infrastructure",
+        "source_url": "https://meridiam.com/fr",
+        "content": "Meridiam clôture son fonds infrastructure transition énergétique à 2 milliards d'euros. Investissements dans les énergies renouvelables et les infrastructures de mobilité.",
+        "signal_type": "fund_closing",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "Fonds infrastructure ≠ PE mid-market — hors scope potentiel"
+      },
+      {
+        "id": "review-005",
+        "company_name": "Multi-family Office",
+        "source_url": "https://altaroc.pe",
+        "content": "Altaroc démocratise l'accès au private equity pour les particuliers fortunés avec des tickets d'entrée à partir de 100 000 euros sur des fonds tier-1 mondiaux.",
+        "signal_type": "partnership",
+        "geography": "France",
+        "human_decision": "REVIEW",
+        "notes": "Distribution PE indirect — pas un fonds d'investissement direct"
+      },
+      {
+        "id": "review-006",
+        "company_name": "Fonds Venture Capital",
+        "source_url": "https://partech.com",
+        "content": "Partech Ventures clôture son nouveau fonds growth à 400M euros pour investir dans des scale-ups technologiques européennes entre la Série B et la pré-IPO.",
+        "signal_type": "fund_closing",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "VC growth ≠ PE mid-market traditionnel — scope à clarifier"
+      },
+      {
+        "id": "review-007",
+        "company_name": "Cabinet Transaction Services",
+        "source_url": "https://pwc.fr/transaction-services",
+        "content": "PwC Transaction Services France renforce son équipe avec 15 recrutements pour accompagner la reprise des opérations M&A et PE post-Covid sur le marché français.",
+        "signal_type": "hiring",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "TS = partenaire naturel PE — apporteur ou client potentiel"
+      },
+      {
+        "id": "review-008",
+        "company_name": "Fonds Secondaire",
+        "source_url": "https://icgam.com",
+        "content": "ICG AM lance un véhicule secondaire dédié au rachat de parts de fonds PE mid-market européens, avec un objectif de levée de 1,5 milliard d'euros.",
+        "signal_type": "fund_closing",
+        "geography": "Europe",
+        "human_decision": "REVIEW",
+        "notes": "Marché secondaire PE — connexe mais pas direct"
+      },
+      {
+        "id": "review-009",
+        "company_name": "Corporate Venture",
+        "source_url": "https://totalenergies.com/ventures",
+        "content": "TotalEnergies Ventures augmente sa capacité d'investissement à 300M euros pour des participations minoritaires dans des startups de la transition énergétique.",
+        "signal_type": "expansion",
+        "geography": "Île-de-France",
+        "human_decision": "REVIEW",
+        "notes": "CVC énergétique ≠ PE financier — très hors scope"
+      },
+      {
+        "id": "review-010",
+        "company_name": "Fonds Immobilier",
+        "source_url": "https://primonial.com/private-equity",
+        "content": "Primonial lance une nouvelle SCPI de rendement et étend son activité au private equity avec un fonds de 200M dédié aux PME françaises rentables.",
+        "signal_type": "expansion",
+        "geography": "France",
+        "human_decision": "REVIEW",
+        "notes": "Acteur immobilier qui diversifie en PE — pertinence incertaine"
+      }
+    ]
+  }
